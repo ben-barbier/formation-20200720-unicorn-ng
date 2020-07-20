@@ -6,4 +6,6 @@
 <p>hobbies: {{ unicorn.hobbies }}</p>
 <p>capacities: {{ unicorn.capacities }}</p>
 
-<button (click)="removeUnicorn()">🗑</button>
+<button mat-mini-fab color="warn" (click)="removeUnicorn()">
+    <mat-icon>delete</mat-icon>
+</button>
