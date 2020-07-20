@@ -14,16 +14,10 @@ export class UnicornCardComponent implements OnInit {
     @Output()
     public removed = new EventEmitter<void>();
 
-    // OnChange => Afficher l'age
-
-    constructor() {
-        debugger;
-        console.log(this.unicorn);
-    }
+    public age: number;
 
     ngOnInit(): void {
-        debugger;
-        console.log(this.unicorn);
+        this.age = new Date().getFullYear() - this.unicorn.birthyear;
     }
 
     public removeUnicorn() {
