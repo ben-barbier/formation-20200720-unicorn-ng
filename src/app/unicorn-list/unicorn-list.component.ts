@@ -15,4 +15,14 @@ export class UnicornListComponent {
         this.unicornsService.getAll().subscribe(unicorns => this.unicorns = unicorns);
     }
 
+    public removeUnicornFromStable(unicorn: Unicorn) {
+        this.unicorns = this.unicorns.filter(u => u.id !== unicorn.id);
+        // filter (N) => <=N
+        // map (N) => (N)
+        // reduce (N) => 1
+        // some / every (N) => 1boolean
+        // find (N) => 0/1
+        // sort
+        // forEach (N) => /
+    }
 }

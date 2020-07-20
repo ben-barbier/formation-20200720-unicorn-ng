@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
 import { Unicorn } from "../../shared/models/unicorn.model";
 
 @Component({
@@ -10,6 +10,9 @@ export class UnicornCardComponent implements OnInit {
 
     @Input()
     public unicorn: Unicorn;
+
+    @Output()
+    public removed = new EventEmitter<void>();
 
     // OnChange => Afficher l'age
 
@@ -23,4 +26,7 @@ export class UnicornCardComponent implements OnInit {
         console.log(this.unicorn);
     }
 
+    public removeUnicorn() {
+        this.removed.emit();
+    }
 }
