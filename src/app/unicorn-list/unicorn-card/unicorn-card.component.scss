@@ -1,10 +1,14 @@
-:host {
-    border: 1px solid red;
-    padding: 5px;
-    display: inline-block;
-    margin: 5px;
+mat-card {
+    display: block;
+    max-width: 250px;
+    margin: 10px 10px;
 }
 
 p {
     color: blue;
+}
+
+mat-card-actions {
+    display: flex;
+    justify-content: space-evenly;
 }

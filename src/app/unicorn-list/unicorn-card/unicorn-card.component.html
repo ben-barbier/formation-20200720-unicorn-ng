@@ -1,11 +1,20 @@
-<p>id: {{ unicorn.id }}</p>
-<p>name: {{ unicorn.name | magicalName }}</p>
-<p>age: {{ age < 60 ? age : '👴' }}</p>
-<p>weight: {{ unicorn.weight }}</p>
-<p>photo: {{ unicorn.photo }}</p>
-<p>hobbies: {{ unicorn.hobbies }}</p>
-<p>capacities: {{ unicorn.capacitiesLabels }}</p>
-
-<button mat-mini-fab color="warn" (click)="removeUnicorn()">
-    <mat-icon>delete</mat-icon>
-</button>
+<mat-card>
+    <mat-card-header>
+        <img mat-card-avatar [src]="unicorn.photo" alt="">
+        <mat-card-title>{{ unicorn.name | magicalName }}</mat-card-title>
+        <mat-card-subtitle>{{ unicorn.id }}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="unicorn.photo" alt="">
+    <mat-card-content>
+        <p>age: {{ age < 60 ? age : '👴' }}</p>
+        <p>weight: {{ unicorn.weight }}</p>
+        <p>hobbies: {{ unicorn.hobbies }}</p>
+        <p>capacities: {{ unicorn.capacitiesLabels }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-mini-fab color="warn" (click)="removeUnicorn()"><mat-icon>delete</mat-icon></button>
+        <button mat-mini-fab color="primary"><mat-icon>favorite</mat-icon></button>
+        <button mat-mini-fab color="primary"><mat-icon>edit</mat-icon></button>
+        <button mat-mini-fab color="primary"><mat-icon>visibility</mat-icon></button>
+    </mat-card-actions>
+</mat-card>

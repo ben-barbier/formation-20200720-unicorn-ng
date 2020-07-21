@@ -19,6 +19,7 @@ import { catchError, filter, finalize, flatMap, map, pluck, reduce, tap, toArray
 import { UnicornsService } from "./shared/services/unicorns.service";
 import { CapacitiesService } from "./shared/services/capacities.service";
 import { MagicalNamePipe } from './shared/pipes/magical-name.pipe';
+import { MatCardModule } from "@angular/material/card";
 
 @NgModule({
     declarations: [
@@ -39,6 +40,7 @@ import { MagicalNamePipe } from './shared/pipes/magical-name.pipe';
         MatToolbarModule,
         MatSidenavModule,
         MatListModule,
+        MatCardModule,
     ],
     providers: [],
     bootstrap: [AppComponent]
