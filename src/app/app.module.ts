@@ -14,9 +14,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { NavComponent } from "./shared/components/nav/nav.component";
-import { from, of } from "rxjs";
+import { forkJoin, from, of } from "rxjs";
 import { filter, finalize, flatMap, map, pluck, reduce, tap, toArray } from "rxjs/operators";
 import { UnicornsService } from "./shared/services/unicorns.service";
+import { CapacitiesService } from "./shared/services/capacities.service";
 
 @NgModule({
     declarations: [
@@ -43,22 +44,20 @@ import { UnicornsService } from "./shared/services/unicorns.service";
 export class AppModule {
 
 
-    constructor(unicornsService: UnicornsService) {
+    constructor(unicornsService: UnicornsService, capacityService: CapacitiesService) {
 
         const facturesHT = [{montant: 10}, {montant: 20}, {montant: 30}];
 
-        unicornsService.getAll().pipe(
-            flatMap(e => e),
-            filter(unicorn => unicorn.birthyear < new Date().getFullYear()),
-            pluck('name'),
-            map(name => name.toUpperCase()),
-            toArray()
-        )
-            .subscribe(e => {
-                debugger;
-            })
+        forkJoin([
+            unicornsService.getAll(),
+            capacityService.getAll(),
+        ]).pipe(
 
-        debugger;
+        ).subscribe(([unicorns, capacities]) => {
+            debugger;
+        });
+
+
 
 
 

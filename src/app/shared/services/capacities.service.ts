@@ -11,6 +11,10 @@ export class CapacitiesService {
 
     constructor(private http: HttpClient) { }
 
+    public getAll(): Observable<Capacity[]> {
+        return this.http.get<Capacity[]>(`${environment.apiUrl}/capacities`);
+    }
+
     public get(capacityId: number): Observable<Capacity> {
         return this.http.get<Capacity>(`${environment.apiUrl}/capacities/${capacityId}`);
     }
