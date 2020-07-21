@@ -10,7 +10,7 @@ import { flatMap, take, toArray } from "rxjs/operators";
 })
 export class UnicornListComponent {
 
-    public unicorns: Unicorn[];
+    public unicorns: Unicorn[] = [];
 
     constructor(private unicornsService: UnicornsService) {
         this.unicornsService.getAllWithCapacitiesLabels().subscribe(unicorns => this.unicorns = unicorns);

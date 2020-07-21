@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
     name: 'magicalName',
-    pure: false,
+    pure: true,
 })
 export class MagicalNamePipe implements PipeTransform {
 
