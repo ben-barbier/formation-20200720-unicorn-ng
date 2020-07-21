@@ -18,7 +18,11 @@ export class UnicornsService {
         return this.http.get<Unicorn[]>(`${environment.apiUrl}/unicorns`);
     }
 
-    public getAllWithCapacitiesLabels(): Observable<Unicorn[]> {
+    public delete(unicorn: Unicorn): Observable<void> {
+        return this.http.delete<void>(`${environment.apiUrl}/unicorns/${unicorn.id}`);
+    }
+
+    public getAllWithCapacitiesLabels2(): Observable<Unicorn[]> {
         return this.getAll().pipe(
             flatMap(e => e),
             mergeMap((unicorn: Unicorn) => from(unicorn.capacities).pipe(
@@ -32,7 +36,7 @@ export class UnicornsService {
         );
     }
 
-    public listWithCapacitiesLabels2(): Observable<Unicorn[]> {
+    public getAllWithCapacitiesLabels(): Observable<Unicorn[]> {
         return forkJoin([
             this.getAll(),
             this.capacitiesService.getAll(),
