@@ -48,12 +48,5 @@ export class UnicornsService {
         );
     }
 
-
-    // Dans une fonction getAllWithCapacitiesLabels(), récupérez toutes les licornes,
-    // en utilisant la ressource 'http://localhost:3000/unicorns'.
-    // Compléter la propriété capacityLabels
-    // de ces éléments grâce à l'utilisation de `http://localhost:3000/capacities/${capacity}`.
-
-
 }
 

@@ -1,8 +1,5 @@
-
-
-
 <p>id: {{ unicorn.id }}</p>
-<p>name: {{ unicorn.name }}</p>
+<p>name: {{ unicorn.name | magicalName }}</p>
 <p>age: {{ age < 60 ? age : '👴' }}</p>
 <p>weight: {{ unicorn.weight }}</p>
 <p>photo: {{ unicorn.photo }}</p>

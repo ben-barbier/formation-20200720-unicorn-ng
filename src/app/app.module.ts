@@ -14,17 +14,19 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { NavComponent } from "./shared/components/nav/nav.component";
-import { forkJoin, from, of } from "rxjs";
-import { filter, finalize, flatMap, map, pluck, reduce, tap, toArray } from "rxjs/operators";
+import { forkJoin, from, of, throwError } from "rxjs";
+import { catchError, filter, finalize, flatMap, map, pluck, reduce, tap, toArray } from "rxjs/operators";
 import { UnicornsService } from "./shared/services/unicorns.service";
 import { CapacitiesService } from "./shared/services/capacities.service";
+import { MagicalNamePipe } from './shared/pipes/magical-name.pipe';
 
 @NgModule({
     declarations: [
         AppComponent,
         UnicornListComponent,
         UnicornCardComponent,
-        NavComponent
+        NavComponent,
+        MagicalNamePipe
     ],
     imports: [
         BrowserModule,
@@ -41,28 +43,4 @@ import { CapacitiesService } from "./shared/services/capacities.service";
     providers: [],
     bootstrap: [AppComponent]
 })
-export class AppModule {
-
-
-    constructor(unicornsService: UnicornsService, capacityService: CapacitiesService) {
-
-        const facturesHT = [{montant: 10}, {montant: 20}, {montant: 30}];
-
-        forkJoin([
-            unicornsService.getAll(),
-            capacityService.getAll(),
-        ]).pipe(
-
-        ).subscribe(([unicorns, capacities]) => {
-            debugger;
-        });
-
-
-
-
-
-    }
-
-
-
-}
+export class AppModule {}

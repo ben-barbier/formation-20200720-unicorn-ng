@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UnicornsService } from "../shared/services/unicorns.service";
 import { Unicorn } from "../shared/models/unicorn.model";
+import { flatMap, take, toArray } from "rxjs/operators";
 
 @Component({
     selector: 'app-unicorn-list',
@@ -17,12 +18,5 @@ export class UnicornListComponent {
 
     public removeUnicornFromStable(unicorn: Unicorn) {
         this.unicorns = this.unicorns.filter(u => u.id !== unicorn.id);
-        // filter (N) => <=N
-        // map (N) => (N)
-        // reduce (N) => 1
-        // some / every (N) => 1boolean
-        // find (N) => 0/1
-        // sort
-        // forEach (N) => /
     }
 }
