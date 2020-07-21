@@ -1,10 +1,13 @@
+
+
+
 <p>id: {{ unicorn.id }}</p>
 <p>name: {{ unicorn.name }}</p>
 <p>age: {{ age < 60 ? age : '👴' }}</p>
 <p>weight: {{ unicorn.weight }}</p>
 <p>photo: {{ unicorn.photo }}</p>
 <p>hobbies: {{ unicorn.hobbies }}</p>
-<p>capacities: {{ unicorn.capacities }}</p>
+<p>capacities: {{ unicorn.capacitiesLabels }}</p>
 
 <button mat-mini-fab color="warn" (click)="removeUnicorn()">
     <mat-icon>delete</mat-icon>

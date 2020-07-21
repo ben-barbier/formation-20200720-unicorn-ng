@@ -14,6 +14,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { NavComponent } from "./shared/components/nav/nav.component";
+import { from, of } from "rxjs";
+import { filter, finalize, flatMap, map, pluck, reduce, tap, toArray } from "rxjs/operators";
+import { UnicornsService } from "./shared/services/unicorns.service";
 
 @NgModule({
     declarations: [
@@ -37,4 +40,30 @@ import { NavComponent } from "./shared/components/nav/nav.component";
     providers: [],
     bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+
+
+    constructor(unicornsService: UnicornsService) {
+
+        const facturesHT = [{montant: 10}, {montant: 20}, {montant: 30}];
+
+        unicornsService.getAll().pipe(
+            flatMap(e => e),
+            filter(unicorn => unicorn.birthyear < new Date().getFullYear()),
+            pluck('name'),
+            map(name => name.toUpperCase()),
+            toArray()
+        )
+            .subscribe(e => {
+                debugger;
+            })
+
+        debugger;
+
+
+
+    }
+
+
+
+}
