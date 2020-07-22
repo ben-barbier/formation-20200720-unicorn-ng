@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { UnicornsService } from "../shared/services/unicorns.service";
-import { Unicorn } from "../shared/models/unicorn.model";
+import { UnicornsService } from "../../shared/services/unicorns.service";
+import { Unicorn } from "../../shared/models/unicorn.model";
 
 @Component({
     selector: 'app-unicorn-list',

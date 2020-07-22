@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Unicorn } from "../../shared/models/unicorn.model";
-import { CartService } from "../../shared/services/cart.service";
+import { Unicorn } from "../../../shared/models/unicorn.model";
+import { CartService } from "../../../shared/services/cart.service";
 
 @Component({
     selector: 'app-unicorn-card',

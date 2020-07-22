@@ -18,6 +18,10 @@ export class UnicornsService {
         return this.http.get<Unicorn[]>(`${environment.apiUrl}/unicorns`);
     }
 
+    public getById(id: number): Observable<Unicorn> {
+        return this.http.get<Unicorn>(`${environment.apiUrl}/unicorns/${id}`);
+    }
+
     public delete(unicorn: Unicorn): Observable<void> {
         return this.http.delete<void>(`${environment.apiUrl}/unicorns/${unicorn.id}`);
     }
@@ -51,6 +55,7 @@ export class UnicornsService {
             )
         );
     }
+
 
 }
 
