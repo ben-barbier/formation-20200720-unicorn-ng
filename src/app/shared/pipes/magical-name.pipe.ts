@@ -5,12 +5,11 @@ import { Pipe, PipeTransform } from '@angular/core';
     pure: true,
 })
 export class MagicalNamePipe implements PipeTransform {
-
     transform(value: string): string {
         console.count('MagicalNamePipe');
         return value
             .split('')
-            .map((char, idx) => idx % 2 ? char.toLowerCase() : char.toUpperCase())
+            .map((char, idx) => (idx % 2 ? char.toLowerCase() : char.toUpperCase()))
             .join('');
     }
 }

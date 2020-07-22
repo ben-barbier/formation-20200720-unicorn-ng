@@ -8,13 +8,13 @@ import { UnicornsService } from '../services/unicorns.service';
     providedIn: 'root',
 })
 export class OddGuard implements CanActivate {
-    constructor(private unicornService: UnicornsService, private router: Router) {}
+    constructor(private unicornsService: UnicornsService, private router: Router) {}
 
     canActivate(
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot,
     ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        return this.unicornService.getById(next.params.id).pipe(
+        return this.unicornsService.getById(next.params.id).pipe(
             pluck('birthyear'),
             map((birthyear: number) => !(birthyear % 2)),
             map((canActivate: boolean) => {

@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { filter, mergeMap } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 import { EditUnicornComponent } from '../../../shared/dialogs/edit-unicorn/edit-unicorn.component';
 import { Unicorn } from '../../../shared/models/unicorn.model';
-import { CartService } from '../../../shared/services/cart.service';
-import { UnicornsService } from '../../../shared/services/unicorns.service';
+import { CartDispatchers } from '../../../store/services/cart.dispatchers';
+import { CartSelectors } from '../../../store/services/cart.selectors';
+import { UnicornsDispatchers } from '../../../store/services/unicorns.dispatchers';
 
 @Component({
     selector: 'app-unicorn-card',
@@ -22,14 +23,15 @@ export class UnicornCardComponent implements OnInit {
     public isInCart = false;
 
     constructor(
-        private cartService: CartService,
         private dialog: MatDialog,
-        private unicornsService: UnicornsService,
+        private cartSelectors: CartSelectors,
+        private cartDispatchers: CartDispatchers,
+        private unicornsDispatchers: UnicornsDispatchers,
     ) {}
 
     ngOnInit(): void {
         this.age = new Date().getFullYear() - this.unicorn.birthyear;
-        this.isInCart = this.cartService.isInCart(this.unicorn);
+        this.cartSelectors.unicornIsInCart$(this.unicorn.id).subscribe(isInCart => (this.isInCart = isInCart));
     }
 
     public removeUnicorn() {
@@ -37,8 +39,11 @@ export class UnicornCardComponent implements OnInit {
     }
 
     public toggleToCart() {
-        this.cartService.toggleToCart(this.unicorn);
-        this.isInCart = !this.isInCart;
+        if (this.isInCart) {
+            this.cartDispatchers.removeUnicornFromCart(this.unicorn);
+        } else {
+            this.cartDispatchers.addUnicornToCart(this.unicorn);
+        }
     }
 
     public openDialog() {
@@ -47,10 +52,7 @@ export class UnicornCardComponent implements OnInit {
                 data: { unicorn: this.unicorn },
             })
             .afterClosed()
-            .pipe(
-                filter(Boolean),
-                mergeMap((unicornToUpdate: Unicorn) => this.unicornsService.update(unicornToUpdate)),
-            )
-            .subscribe(unicornUpdated => (this.unicorn = unicornUpdated));
+            .pipe(filter(Boolean))
+            .subscribe((unicorn: Unicorn) => this.unicornsDispatchers.updateUnicorn(unicorn));
     }
 }
