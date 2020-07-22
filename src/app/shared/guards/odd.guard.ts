@@ -1,21 +1,19 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { UnicornsService } from "../services/unicorns.service";
-import { map, pluck } from "rxjs/operators";
+import { map, pluck } from 'rxjs/operators';
+import { UnicornsService } from '../services/unicorns.service';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class OddGuard implements CanActivate {
-
-    constructor(private unicornService: UnicornsService,
-                private router: Router) {}
+    constructor(private unicornService: UnicornsService, private router: Router) {}
 
     canActivate(
         next: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
+        state: RouterStateSnapshot,
+    ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
         return this.unicornService.getById(next.params.id).pipe(
             pluck('birthyear'),
             map((birthyear: number) => !(birthyear % 2)),
@@ -28,5 +26,4 @@ export class OddGuard implements CanActivate {
             }),
         );
     }
-
 }
