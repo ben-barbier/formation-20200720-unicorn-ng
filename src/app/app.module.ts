@@ -1,26 +1,26 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { LayoutModule } from '@angular/cdk/layout';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from "@angular/common/http";
-import { UnicornListComponent } from './pages/unicorn-list/unicorn-list.component';
 import { UnicornCardComponent } from './pages/unicorn-list/unicorn-card/unicorn-card.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from "@angular/material/button";
-import { MatIconModule } from "@angular/material/icon";
-import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { NavComponent } from "./shared/components/nav/nav.component";
-import { forkJoin, from, of, throwError } from "rxjs";
-import { catchError, filter, finalize, flatMap, map, pluck, reduce, tap, toArray } from "rxjs/operators";
-import { UnicornsService } from "./shared/services/unicorns.service";
-import { CapacitiesService } from "./shared/services/capacities.service";
-import { MagicalNamePipe } from './shared/pipes/magical-name.pipe';
-import { MatCardModule } from "@angular/material/card";
+import { UnicornListComponent } from './pages/unicorn-list/unicorn-list.component';
 import { UnicornComponent } from './pages/unicorn/unicorn.component';
+import { NavComponent } from './shared/components/nav/nav.component';
+import { EditUnicornComponent } from './shared/dialogs/edit-unicorn/edit-unicorn.component';
+import { MagicalNamePipe } from './shared/pipes/magical-name.pipe';
 
 @NgModule({
     declarations: [
@@ -29,7 +29,8 @@ import { UnicornComponent } from './pages/unicorn/unicorn.component';
         UnicornCardComponent,
         NavComponent,
         MagicalNamePipe,
-        UnicornComponent
+        UnicornComponent,
+        EditUnicornComponent,
     ],
     imports: [
         BrowserModule,
@@ -43,8 +44,12 @@ import { UnicornComponent } from './pages/unicorn/unicorn.component';
         MatSidenavModule,
         MatListModule,
         MatCardModule,
+        MatDialogModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
     ],
     providers: [],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
 })
 export class AppModule {}

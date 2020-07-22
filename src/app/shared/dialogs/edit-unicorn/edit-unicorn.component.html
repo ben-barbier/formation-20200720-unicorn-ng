@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Unicorn {{ data.unicorn.name }}</h1>
+
+<form (ngSubmit)="save(unicornForm.value)" #unicornForm="ngForm">
+    <div mat-dialog-content>
+        <p>Envie de changer de nom ?</p>
+
+        <!--        <input type="text" name="name" ngModel required>-->
+
+        <mat-form-field>
+            <mat-label>Nom</mat-label>
+            <!--        [(ngModel)]="data.animal"-->
+            <input type="text" matInput ngModel name="name" required />
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button mat-dialog-close>Annuler</button>
+        <button type="submit" mat-raised-button color="primary" [disabled]="unicornForm.invalid">Ok</button>
+    </div>
+</form>
