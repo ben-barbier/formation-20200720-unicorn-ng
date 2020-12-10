@@ -15,7 +15,7 @@ export class UnicornListComponent {
         this.unicornsDispatchers.getUnicorns();
     }
 
-    public removeUnicornFromStable(unicorn: Unicorn) {
+    public deleteUnicorn(unicorn: Unicorn) {
         this.unicornsDispatchers.deleteUnicorn(unicorn);
     }
 }

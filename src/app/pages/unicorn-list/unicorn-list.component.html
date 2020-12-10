@@ -5,7 +5,7 @@
         <app-unicorn-card
             *ngFor="let unicorn of unicorns"
             [unicorn]="unicorn"
-            (removed)="removeUnicornFromStable(unicorn)"
+            (removed)="deleteUnicorn(unicorn)"
         ></app-unicorn-card>
     </section>
 </ng-container>
