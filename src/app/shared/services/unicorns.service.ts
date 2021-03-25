@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { forkJoin, from, Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { flatMap, map, mergeMap, pluck, toArray } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { Capacity } from '../models/capacity.model';
 import { Unicorn } from '../models/unicorn.model';
 import { CapacitiesService } from './capacities.service';
 
@@ -48,17 +47,6 @@ export class UnicornsService {
     }
 
     public getAllWithCapacitiesLabels(): Observable<Unicorn[]> {
-        return forkJoin([this.getAll(), this.capacitiesService.getAll()]).pipe(
-            map(([unicorns, capacities]): Unicorn[] =>
-                unicorns.map(
-                    (u: Unicorn): Unicorn => ({
-                        ...u,
-                        capacitiesLabels: u.capacities.map(
-                            (c: number): string => capacities.find((c2: Capacity) => c2.id === c).label,
-                        ),
-                    }),
-                ),
-            ),
-        );
+        return this.getAll();
     }
 }

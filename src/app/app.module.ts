@@ -13,6 +13,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UnicornCardComponent } from './pages/unicorn-list/unicorn-card/unicorn-card.component';
@@ -21,6 +23,9 @@ import { UnicornComponent } from './pages/unicorn/unicorn.component';
 import { NavComponent } from './shared/components/nav/nav.component';
 import { EditUnicornComponent } from './shared/dialogs/edit-unicorn/edit-unicorn.component';
 import { MagicalNamePipe } from './shared/pipes/magical-name.pipe';
+import { UnicornsEffects } from './store/effects/unicorns.effects';
+import { cartReducer } from './store/reducers/cart.reducer';
+import { unicornsReducer } from './store/reducers/unicorns.reducer';
 
 @NgModule({
     declarations: [
@@ -48,6 +53,14 @@ import { MagicalNamePipe } from './shared/pipes/magical-name.pipe';
         FormsModule,
         MatFormFieldModule,
         MatInputModule,
+        StoreModule.forRoot(
+            {
+                unicorns: unicornsReducer,
+                cart: cartReducer,
+            },
+            {},
+        ),
+        EffectsModule.forRoot([UnicornsEffects]),
     ],
     providers: [],
     bootstrap: [AppComponent],
