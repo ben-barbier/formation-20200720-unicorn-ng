@@ -1,26 +1,21 @@
-import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { CartService } from "../../services/cart.service";
+import { CartSelectors } from '../../../store/selectors/cart.selectors';
 
 @Component({
     selector: 'app-nav',
     templateUrl: './nav.component.html',
-    styleUrls: ['./nav.component.scss']
+    styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent {
+    public cartSize$ = this.cartSelectors.cartSize$;
 
-    public cartSize = 0;
+    isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+        map(result => result.matches),
+        shareReplay(),
+    );
 
-    isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-        .pipe(
-            map(result => result.matches),
-            shareReplay()
-        );
-
-    constructor(private breakpointObserver: BreakpointObserver, private cartService: CartService) {
-        cartService.cart.subscribe(cart => this.cartSize = cart.length);
-    }
-
+    constructor(private breakpointObserver: BreakpointObserver, private cartSelectors: CartSelectors) {}
 }

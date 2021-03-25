@@ -1,10 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { filter, mergeMap } from 'rxjs/operators';
 import { EditUnicornComponent } from '../../../shared/dialogs/edit-unicorn/edit-unicorn.component';
 import { Unicorn } from '../../../shared/models/unicorn.model';
 import { CartService } from '../../../shared/services/cart.service';
 import { UnicornsService } from '../../../shared/services/unicorns.service';
+import { CartDispatchers } from '../../../store/dispatchers/cart.dispatchers';
+import { UnicornsDispatchers } from '../../../store/dispatchers/unicorns.dispatchers';
 
 @Component({
     selector: 'app-unicorn-card',
@@ -15,16 +17,15 @@ export class UnicornCardComponent implements OnInit {
     @Input()
     public unicorn: Unicorn;
 
-    @Output()
-    public removed = new EventEmitter<void>();
-
     public age: number;
     public isInCart = false;
 
     constructor(
         private cartService: CartService,
         private dialog: MatDialog,
-        private unicornsService: UnicornsService,
+        private unicornsService: UnicornsService, //TODO: to Delete
+        private unicornsDispatchers: UnicornsDispatchers,
+        private cartDispatchers: CartDispatchers,
     ) {}
 
     ngOnInit(): void {
@@ -33,12 +34,14 @@ export class UnicornCardComponent implements OnInit {
     }
 
     public removeUnicorn() {
-        this.removed.emit();
+        this.unicornsDispatchers.deleteUnicorn(this.unicorn);
     }
 
     public toggleToCart() {
-        this.cartService.toggleToCart(this.unicorn);
-        this.isInCart = !this.isInCart;
+        this.cartDispatchers.addUnicornToCart(this.unicorn);
+
+        // this.cartService.toggleToCart(this.unicorn);
+        // this.isInCart = !this.isInCart;
     }
 
     public openDialog() {

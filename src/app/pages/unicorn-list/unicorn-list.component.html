@@ -1,10 +1,5 @@
-<h1>Bonne nouvelle, il reste {{ unicorns.length }} licornes à adopter 🚀 !!!</h1>
+<h1>Bonne nouvelle, il reste {{ (unicorns$ | async)?.length }} licornes à adopter 🚀 !!!</h1>
 
 <section class="cards-container">
-    <app-unicorn-card
-        *ngFor="let unicorn of unicorns"
-        [unicorn]="unicorn"
-        (removed)="removeUnicornFromStable(unicorn)"
-    ></app-unicorn-card>
+    <app-unicorn-card *ngFor="let unicorn of unicorns$ | async" [unicorn]="unicorn"></app-unicorn-card>
 </section>
-
